@@ -9,8 +9,8 @@ import java.io.IOException;
 public abstract class AppServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().write(handleGet());
+        response.getWriter().write(handleGet(request));
     }
 
-    protected abstract String handleGet();
+    protected abstract String handleGet(HttpServletRequest request);
 }

@@ -5,6 +5,8 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
+import java.io.IOException;
+
 public class MobilityApp {
 
     private Server server;
@@ -17,7 +19,7 @@ public class MobilityApp {
         int port = 8081;
         server = new Server();
         server.addConnector(serverConnector(port, server));
-        server.setHandler(helloServletHandler());
+        server.setHandler(mobilityServletHandler());
         server.start();
     }
 
@@ -25,10 +27,17 @@ public class MobilityApp {
         server.stop();
     }
 
-    private static ServletContextHandler helloServletHandler() {
+    private static ServletContextHandler mobilityServletHandler() throws IOException {
         ServletContextHandler servletHandler = new ServletContextHandler();
+
+        CsvReader csvReader = new CsvReader();
+        Delays delays = Delays.loadFile(csvReader);
+        Lines lines = Lines.loadFile(csvReader, delays);
+        Times times = Times.loadFile(csvReader);
+        Stops stops = Stops.loadFile(csvReader);
+
         servletHandler.addServlet(new ServletHolder(new FindVehicleServlet()), "/find");
-        servletHandler.addServlet(new ServletHolder(new NextVehicleAtStopServlet()), "/next");
+        servletHandler.addServlet(new ServletHolder(new NextVehicleAtStopServlet(lines, delays, times, stops)), "/next");
         servletHandler.addServlet(new ServletHolder(new LineDelaysServlet()), "/delays");
         return servletHandler;
     }
