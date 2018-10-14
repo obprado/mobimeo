@@ -10,7 +10,7 @@ public class NextVehicleTest extends AcceptanceTest {
 
     @Test
     public void shouldFindVehicle() throws IOException {
-        // M4 should come to stop 1 (1, 4)
+        // M4 should come to stop 1 (1, 4). Time represents 'current time'
         whenWeMakeAGetRequestTo("/next?coordinateX=1&coordinateY=4&time=10:00:30");
 
         assertThat(response.getStatusLine().getStatusCode()).isEqualTo(200);

@@ -15,8 +15,12 @@
  * The user of the service (FE, other BE app or mobile) will provide the current time (maybe sometimes it's not the current one?)
  * We always find a valid stop for the X, Y coordinates sent by the user (no sad cases handled)
  
+ * There will always be a vehicle in coordinates X, Y when the user ask for it at time Z
+ * There will be exactly one vehicle, not more
+ 
 # Considerations
 
  * Didn't have time to finish one of the endpoints
  * Given the time, I would unit test more
  * Given the time, I would rethink the architecture & class responsability
+ * There are a few things to refactor. A bit of duplicated code, stuff to clean up a bit 

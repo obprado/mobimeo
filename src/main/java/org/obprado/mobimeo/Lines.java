@@ -22,8 +22,12 @@ public class Lines {
     public List<TimeLine> forTimes(List<Time> arrivals) {
         return arrivals
                 .stream()
-                .map(arrival -> new TimeLine(arrival, lineForId(arrival.getLineId())))
+                .map(this::toTimeline)
                 .collect(Collectors.toList());
+    }
+
+    public TimeLine toTimeline(Time arrival) {
+        return new TimeLine(arrival, lineForId(arrival.getLineId()));
     }
 
     public Line lineForId(int lineId) {

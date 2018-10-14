@@ -36,9 +36,9 @@ public class MobilityApp {
         Times times = Times.loadFile(csvReader);
         Stops stops = Stops.loadFile(csvReader);
 
-        servletHandler.addServlet(new ServletHolder(new FindVehicleServlet()), "/find");
-        servletHandler.addServlet(new ServletHolder(new NextVehicleAtStopServlet(lines, delays, times, stops)), "/next");
-        servletHandler.addServlet(new ServletHolder(new LineDelaysServlet(lines, delays, times, stops)), "/delays");
+        servletHandler.addServlet(new ServletHolder(new FindVehicleServlet(lines, times, stops)), "/find");
+        servletHandler.addServlet(new ServletHolder(new NextVehicleAtStopServlet(lines, times, stops)), "/next");
+        servletHandler.addServlet(new ServletHolder(new LineDelaysServlet(lines)), "/delays");
         return servletHandler;
     }
 

@@ -10,7 +10,6 @@ import static java.lang.String.format;
 public class NextVehicleAtStopServlet extends AppServlet {
 
     private final Lines lines;
-    private final Delays delays;
     private final Times times;
     private final Stops stops;
 
@@ -20,10 +19,9 @@ public class NextVehicleAtStopServlet extends AppServlet {
             "  \"actualTime\": \"%s\"\n" +
             "}";
 
-    public NextVehicleAtStopServlet(Lines lines, Delays delays, Times times, Stops stops) {
+    public NextVehicleAtStopServlet(Lines lines, Times times, Stops stops) {
         super();
         this.lines = lines;
-        this.delays = delays;
         this.times = times;
         this.stops = stops;
     }

@@ -1,10 +1,5 @@
 package api;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,10 +9,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class FindVehicleTest extends AcceptanceTest {
 
     @Test
-    public void endpointShouldWork() throws IOException {
-        whenWeMakeAGetRequestTo("/find");
+    public void findVehicleAtCoordinates() throws IOException {
+        whenWeMakeAGetRequestTo("/find?coordinateX=1&coordinateY=4&time=10:03:00");
         assertThat(response.getStatusLine().getStatusCode()).isEqualTo(200);
-        assertThat(responseBody).isEqualTo("Find a vehicle!");
+        assertThat(responseBody).isEqualTo("{ \n" +
+                "  \"line\": \"M4\",\n" +
+                "  \"regularTime\": \"10:02:00\",\n" +
+                "  \"actualTime\": \"10:03:00\"\n" +
+                "}");
     }
 
 }
