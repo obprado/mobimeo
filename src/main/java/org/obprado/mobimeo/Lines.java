@@ -1,9 +1,7 @@
 package org.obprado.mobimeo;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lines {
@@ -24,15 +22,15 @@ public class Lines {
     public List<TimeLine> forTimes(List<Time> arrivals) {
         return arrivals
                 .stream()
-                .map(arrival -> new TimeLine(arrival, lineForTime(arrival)))
+                .map(arrival -> new TimeLine(arrival, lineForId(arrival.getLineId())))
                 .collect(Collectors.toList());
     }
 
-    private Line lineForTime(Time time) {
+    public Line lineForId(int lineId) {
         return this.content
                 .stream()
                 .map(row -> Line.fromRow(row, delays))
-                .filter(line -> line.getId() == time.getLineId())
+                .filter(line -> line.getId() == lineId)
                 .findFirst()
                 .orElseThrow(() -> new UnsupportedOperationException("TODO: handle sad path"));
     }

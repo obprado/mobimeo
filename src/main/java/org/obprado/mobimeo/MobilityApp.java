@@ -38,7 +38,7 @@ public class MobilityApp {
 
         servletHandler.addServlet(new ServletHolder(new FindVehicleServlet()), "/find");
         servletHandler.addServlet(new ServletHolder(new NextVehicleAtStopServlet(lines, delays, times, stops)), "/next");
-        servletHandler.addServlet(new ServletHolder(new LineDelaysServlet()), "/delays");
+        servletHandler.addServlet(new ServletHolder(new LineDelaysServlet(lines, delays, times, stops)), "/delays");
         return servletHandler;
     }
 

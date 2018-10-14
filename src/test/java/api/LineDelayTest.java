@@ -10,8 +10,10 @@ public class LineDelayTest extends AcceptanceTest {
 
     @Test
     public void endpointShouldWork() throws IOException {
-        whenWeMakeAGetRequestTo("/delays");
+        whenWeMakeAGetRequestTo("/delays?lineId=0");
         assertThat(response.getStatusLine().getStatusCode()).isEqualTo(200);
-        assertThat(responseBody).isEqualTo("Line delays!");
+        assertThat(responseBody).isEqualTo("{\n" +
+                "  \"minutesDelayed\": \"1\"\n" +
+                "}");
     }
 }
